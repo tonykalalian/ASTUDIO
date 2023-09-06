@@ -43,14 +43,18 @@ const UserTable = () => {
   const { globalFilter, pageSize, pageIndex } = state;
 
   useEffect(() => {
-    axios
-      .get("https://dummyjson.com/users/")
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://dummyjson.com/users/?limit=100"
+        ); // Update the limit as needed
         setUsers(response?.data?.users || []);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching users:", error);
-      });
+      }
+    };
+
+    fetchData();
   }, [setUsers]);
 
   return (
@@ -64,7 +68,6 @@ const UserTable = () => {
           {...getTableProps()}
         >
           <thead className="table-header">
-            {" "}
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
@@ -143,13 +146,11 @@ const UserTable = () => {
                 setPageSize(Number(e.target.value));
               }}
             >
-              {[5, 10, 20, 50].map((ps) => {
-                return (
-                  <option key={ps} value={ps}>
-                    Show {ps}
-                  </option>
-                );
-              })}
+              {[5, 10, 20, 50].map((ps) => (
+                <option key={ps} value={ps}>
+                  Show {ps}
+                </option>
+              ))}
             </select>
           </span>
         </div>

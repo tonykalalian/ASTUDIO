@@ -1,10 +1,12 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { useTable, usePagination, useGlobalFilter } from "react-table";
 import GlobalFilter from "../GlobalFilter";
 import { useProductContext } from "../ProductContext";
+
 const ProductTable = () => {
   const { products, setProducts } = useProductContext();
+  const [categoryFilter, setCategoryFilter] = useState("ALL"); // Initial filter value
 
   const columns = useMemo(
     () => [
@@ -35,9 +37,29 @@ const ProductTable = () => {
 
   const { globalFilter, pageSize, pageIndex } = state;
 
+  const handleCategoryFilterChange = async (e) => {
+    setCategoryFilter(e.target.value);
+    // Build the API URL with the selected category filter
+    let apiUrl = "https://dummyjson.com/products/";
+
+    // Add category filter if not "ALL"
+    if (e.target.value !== "ALL") {
+      apiUrl += `category/${e.target.value}`;
+    }
+
+    try {
+      const response = await axios.get(apiUrl);
+      setProducts(response?.data?.products || []);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
   useEffect(() => {
+    // Updated the initial API request to fetch all 100 products
+    const apiUrl = "https://dummyjson.com/products?limit=100";
     axios
-      .get("https://dummyjson.com/products/")
+      .get(apiUrl)
       .then((response) => {
         setProducts(response?.data?.products || []);
       })
@@ -50,13 +72,53 @@ const ProductTable = () => {
     <>
       <h3>Products</h3>
       <div className="container">
+        <div className="filter-options">
+          {/* Category filter */}
+          <label>
+            Category:
+            <select
+              value={categoryFilter}
+              onChange={handleCategoryFilterChange}
+            >
+              <option value="ALL">ALL</option>
+              {/* Map through the categories from the API */}
+              {[
+                "smartphones",
+                "laptops",
+                "fragrances",
+                "skincare",
+                "groceries",
+                "home-decoration",
+                "furniture",
+                "tops",
+                "womens-dresses",
+                "womens-shoes",
+                "mens-shirts",
+                "mens-shoes",
+                "mens-watches",
+                "womens-watches",
+                "womens-bags",
+                "womens-jewellery",
+                "sunglasses",
+                "automotive",
+                "motorcycle",
+                "lighting",
+              ].map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+
         <table
           className="table table-striped table-bordered"
           {...getTableProps()}
         >
           <thead className="table-header">
-            {" "}
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
@@ -135,13 +197,11 @@ const ProductTable = () => {
                 setPageSize(Number(e.target.value));
               }}
             >
-              {[5, 10, 20, 50].map((ps) => {
-                return (
-                  <option key={ps} value={ps}>
-                    Show {ps}
-                  </option>
-                );
-              })}
+              {[5, 10, 20, 50].map((ps) => (
+                <option key={ps} value={ps}>
+                  Show {ps}
+                </option>
+              ))}
             </select>
           </span>
         </div>

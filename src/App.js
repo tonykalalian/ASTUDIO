@@ -16,11 +16,11 @@ function App() {
     <>
       <Router>
         <nav>
-          <NavLink to="/users" activeClassName="active-link">
+          <NavLink to="/users" className="active-link">
             Users
           </NavLink>
           <span>/</span>
-          <NavLink to="/products" activeClassName="active-link">
+          <NavLink to="/products" className="active-link">
             Products
           </NavLink>
         </nav>
