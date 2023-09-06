@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from "react";
-import axios from "axios";
+import axios from "../../utils/axios";
 import { useTable, usePagination, useGlobalFilter } from "react-table";
 import GlobalFilter from "../common/GlobalFilter";
 import { useUserContext } from "../context/UserContext";
