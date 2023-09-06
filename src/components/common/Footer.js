@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const FooterContainer = styled.footer`
-  background-color: #322625; /* Dark Brown */
-  color: #ebebeb; /* Light Grey */
+  background-color: #fdc936;
+  color: #322625;
   padding: 20px 0;
   text-align: center;
 `;
@@ -16,7 +16,7 @@ const CopyrightText = styled.p`
 const NameText = styled.p`
   font-size: 24px;
   margin: 0;
-  color: #f0c14b; /* Gold */
+  color: #322625;
 `;
 
 const Footer = () => {

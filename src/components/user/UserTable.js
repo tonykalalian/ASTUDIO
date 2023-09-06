@@ -125,9 +125,10 @@ const UserTable = () => {
             {">>"}
           </button>
           <span>
-            | Page {pageIndex + 1} of {pageOptions.length}
+            | Page {pageIndex + 1} of {pageOptions.length + " "}
           </span>
           <span>
+            {" "}
             Go To Page:{" "}
             <input
               type="number"
