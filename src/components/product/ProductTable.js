@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { useTable, usePagination, useGlobalFilter } from "react-table";
-import GlobalFilter from "../GlobalFilter";
-import { useProductContext } from "../ProductContext";
+import GlobalFilter from "../common/GlobalFilter";
+import { useProductContext } from "../context/ProductContext";
 
 const ProductTable = () => {
   const { products, setProducts } = useProductContext();

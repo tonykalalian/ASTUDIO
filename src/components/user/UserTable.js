@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo } from "react";
 import axios from "axios";
 import { useTable, usePagination, useGlobalFilter } from "react-table";
-import GlobalFilter from "../GlobalFilter";
-import { useUserContext } from "../UserContext";
+import GlobalFilter from "../common/GlobalFilter";
+import { useUserContext } from "../context/UserContext";
 
 const UserTable = () => {
   const { users, setUsers } = useUserContext();

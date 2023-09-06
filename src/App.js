@@ -5,10 +5,10 @@ import {
   Route,
   NavLink,
 } from "react-router-dom";
-import { ProductProvider } from "./ProductContext";
-import { UserProvider } from "./UserContext";
-import UserTable from "./components/UserTable";
-import ProductTable from "./components/ProductTable";
+import { ProductProvider } from "./components/context/ProductContext";
+import { UserProvider } from "./components/context/UserContext";
+import UserTable from "./components/user/UserTable";
+import ProductTable from "./components/product/ProductTable";
 import "./App.css";
 
 function App() {
