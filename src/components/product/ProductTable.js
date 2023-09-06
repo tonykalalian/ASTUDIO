@@ -41,7 +41,7 @@ const ProductTable = () => {
     setCategoryFilter(e.target.value);
     let apiUrl = "https://dummyjson.com/products/";
 
-    // Add category filter if not "ALL"
+    
     if (e.target.value !== "ALL") {
       apiUrl += `category/${e.target.value}`;
     }
