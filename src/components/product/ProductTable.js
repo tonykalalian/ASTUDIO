@@ -6,7 +6,7 @@ import { useProductContext } from "../context/ProductContext";
 
 const ProductTable = () => {
   const { products, setProducts } = useProductContext();
-  const [categoryFilter, setCategoryFilter] = useState("ALL"); // Initial filter value
+  const [categoryFilter, setCategoryFilter] = useState("ALL");
 
   const columns = useMemo(
     () => [
@@ -39,7 +39,6 @@ const ProductTable = () => {
 
   const handleCategoryFilterChange = async (e) => {
     setCategoryFilter(e.target.value);
-    // Build the API URL with the selected category filter
     let apiUrl = "https://dummyjson.com/products/";
 
     // Add category filter if not "ALL"
@@ -56,7 +55,6 @@ const ProductTable = () => {
   };
 
   useEffect(() => {
-    // Updated the initial API request to fetch all 100 products
     const apiUrl = "https://dummyjson.com/products?limit=100";
     axios
       .get(apiUrl)
@@ -73,7 +71,6 @@ const ProductTable = () => {
       <h3>Products</h3>
       <div className="container">
         <div className="filter-options">
-          {/* Category filter */}
           <label>
             Category:
             <select
@@ -81,7 +78,6 @@ const ProductTable = () => {
               onChange={handleCategoryFilterChange}
             >
               <option value="ALL">ALL</option>
-              {/* Map through the categories from the API */}
               {[
                 "smartphones",
                 "laptops",

@@ -47,7 +47,7 @@ const UserTable = () => {
       try {
         const response = await axios.get(
           "https://dummyjson.com/users/?limit=100"
-        ); // Update the limit as needed
+        );
         setUsers(response?.data?.users || []);
       } catch (error) {
         console.error("Error fetching users:", error);
