@@ -59,7 +59,7 @@ const UserTable = () => {
 
   return (
     <>
-      <h3>Users</h3>
+      <h1 style={{ textAlign: "center" }}>Users</h1>
       <div className="container content-container">
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
 

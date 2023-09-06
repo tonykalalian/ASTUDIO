@@ -1,9 +1,10 @@
 import React from "react";
-
+import SearchIcon from "@mui/icons-material/Search";
 const GlobalFilter = ({ filter, setFilter }) => {
   return (
     <div className="input-group">
       <span className="input-group-text" id="basic-addon1">
+        <SearchIcon style={{ fontSize: "small" }} />
         Search
       </span>
       <input
