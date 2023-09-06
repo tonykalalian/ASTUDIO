@@ -1,51 +1,154 @@
-// UserTable.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import axios from "axios";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-
-const columns = [
-  { field: "firstName", headerName: "First Name", width: 130 },
-  { field: "lastName", headerName: "Last Name", width: 130 },
-  { field: "maidenName", headerName: "Maiden Name", width: 130 },
-  { field: "age", headerName: "Age", type: "number", width: 90 },
-  { field: "gender", headerName: "Gender", width: 110 },
-  { field: "email", headerName: "Email", width: 220 },
-  { field: "username", headerName: "User Name", width: 130 },
-  { field: "bloodGroup", headerName: "Blood Group", width: 130 },
-  { field: "eyeColor", headerName: "Eye Color", width: 130 },
-];
+import { useTable, usePagination, useGlobalFilter } from "react-table";
+import GlobalFilter from "../GlobalFilter";
+import { useUserContext } from "../UserContext";
 
 const UserTable = () => {
-  const [userData, setUserData] = useState([]);
+  const { users, setUsers } = useUserContext();
+
+  const columns = useMemo(
+    () => [
+      { Header: "First Name", accessor: "firstName" },
+      { Header: "Last Name", accessor: "lastName" },
+      { Header: "Maiden Name", accessor: "maidenName" },
+      { Header: "Age", accessor: "age" },
+      { Header: "Gender", accessor: "gender" },
+      { Header: "Email", accessor: "email" },
+      { Header: "Username", accessor: "username" },
+      { Header: "Blood Group", accessor: "bloodGroup" },
+      { Header: "Eye Color", accessor: "eyeColor" },
+    ],
+    []
+  );
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    page,
+    prepareRow,
+    setGlobalFilter,
+    nextPage,
+    previousPage,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    gotoPage,
+    pageCount,
+    setPageSize,
+    state,
+  } = useTable({ columns, data: users }, useGlobalFilter, usePagination);
+
+  const { globalFilter, pageSize, pageIndex } = state;
 
   useEffect(() => {
-    // Fetch user data from the API
     axios
-      .get("https://dummyjson.com/users")
+      .get("https://dummyjson.com/users/")
       .then((response) => {
-        setUserData(response.data.users);
+        setUsers(response?.data?.users || []);
       })
       .catch((error) => {
-        console.error("Error fetching user data:", error);
+        console.error("Error fetching users:", error);
       });
-  }, []);
+  }, [setUsers]);
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
-      <DataGrid
-        rows={userData}
-        columns={columns}
-        pageSize={5}
-        checkboxSelection
-        components={{
-          Toolbar: () => (
-            <div>
-              <GridToolbar />
-            </div>
-          ),
-        }}
-      />
-    </div>
+    <>
+      <h3>Users</h3>
+      <div className="container">
+        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+        <table
+          className="table table-striped table-bordered"
+          {...getTableProps()}
+        >
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th {...column.getHeaderProps()}>
+                    {column.render("Header")}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map((row) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <div className="d-flex gap-2 align-items-center justify-content-center">
+          <button
+            className="btn btn-dark"
+            onClick={() => gotoPage(0)}
+            disabled={!canPreviousPage}
+          >
+            {"<<"}
+          </button>
+          <button
+            className="btn btn-dark"
+            onClick={previousPage}
+            disabled={!canPreviousPage}
+          >
+            {"<"}
+          </button>
+          <button
+            className="btn btn-dark"
+            onClick={nextPage}
+            disabled={!canNextPage}
+          >
+            {">"}
+          </button>
+          <button
+            className="btn btn-dark"
+            onClick={() => gotoPage(pageCount - 1)}
+            disabled={!canNextPage}
+          >
+            {">>"}
+          </button>
+          <span>
+            | Page {pageIndex + 1} of {pageOptions.length}
+          </span>
+          <span>
+            Go To Page:{" "}
+            <input
+              type="number"
+              defaultValue={pageIndex + 1}
+              min={1}
+              onChange={(e) => {
+                const pageNbr = e.target.value ? Number(e.target.value) - 1 : 0;
+                gotoPage(pageNbr);
+              }}
+            />
+          </span>
+          <span>
+            <select
+              value={pageSize}
+              onChange={(e) => {
+                setPageSize(Number(e.target.value));
+              }}
+            >
+              {[10, 20, 30].map((ps) => {
+                return (
+                  <option key={ps} value={ps}>
+                    Show {ps}
+                  </option>
+                );
+              })}
+            </select>
+          </span>
+        </div>
+      </div>
+    </>
   );
 };
 
