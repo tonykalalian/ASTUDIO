@@ -9,7 +9,6 @@ import { ProductProvider } from "./components/context/ProductContext";
 import { UserProvider } from "./components/context/UserContext";
 import UserTable from "./components/user/UserTable";
 import ProductTable from "./components/product/ProductTable";
-import "./App.css";
 
 function App() {
   return (
