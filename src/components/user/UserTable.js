@@ -9,15 +9,15 @@ const UserTable = () => {
 
   const columns = useMemo(
     () => [
-      { Header: "First Name", accessor: "firstName" },
-      { Header: "Last Name", accessor: "lastName" },
-      { Header: "Maiden Name", accessor: "maidenName" },
-      { Header: "Age", accessor: "age" },
-      { Header: "Gender", accessor: "gender" },
-      { Header: "Email", accessor: "email" },
-      { Header: "Username", accessor: "username" },
-      { Header: "Blood Group", accessor: "bloodGroup" },
-      { Header: "Eye Color", accessor: "eyeColor" },
+      { Header: "FIRST NAME", accessor: "firstName" },
+      { Header: "LAST NAME", accessor: "lastName" },
+      { Header: "MAIDEN NAME", accessor: "maidenName" },
+      { Header: "AGE", accessor: "age" },
+      { Header: "GENDER", accessor: "gender" },
+      { Header: "EMAIL", accessor: "email" },
+      { Header: "USERNAME", accessor: "username" },
+      { Header: "BLOODGROUP", accessor: "bloodGroup" },
+      { Header: "EYECOLOR", accessor: "eyeColor" },
     ],
     []
   );

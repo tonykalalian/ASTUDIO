@@ -10,9 +10,9 @@ const ProductTable = () => {
 
   const columns = useMemo(
     () => [
-      { Header: "Title", accessor: "title" },
-      { Header: "Brand", accessor: "brand" },
-      { Header: "Category", accessor: "category" },
+      { Header: "TITLE", accessor: "title" },
+      { Header: "BRAND", accessor: "brand" },
+      { Header: "CATEGORY", accessor: "category" },
     ],
     []
   );
