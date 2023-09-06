@@ -3,7 +3,6 @@ import axios from "axios";
 import { useTable, usePagination, useGlobalFilter } from "react-table";
 import GlobalFilter from "../GlobalFilter";
 import { useProductContext } from "../ProductContext";
-
 const ProductTable = () => {
   const { products, setProducts } = useProductContext();
 
@@ -56,7 +55,8 @@ const ProductTable = () => {
           className="table table-striped table-bordered"
           {...getTableProps()}
         >
-          <thead>
+          <thead className="table-header">
+            {" "}
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
@@ -71,7 +71,10 @@ const ProductTable = () => {
             {page.map((row) => {
               prepareRow(row);
               return (
-                <tr {...row.getRowProps()}>
+                <tr
+                  {...row.getRowProps()}
+                  className={row.index === 0 ? "table-row-grey" : "table-row"}
+                >
                   {row.cells.map((cell) => (
                     <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   ))}
@@ -80,6 +83,7 @@ const ProductTable = () => {
             })}
           </tbody>
         </table>
+
         <div className="d-flex gap-2 align-items-center justify-content-center">
           <button
             className="btn btn-dark"
@@ -131,7 +135,7 @@ const ProductTable = () => {
                 setPageSize(Number(e.target.value));
               }}
             >
-              {[10, 20, 30].map((ps) => {
+              {[5, 10, 20, 50].map((ps) => {
                 return (
                   <option key={ps} value={ps}>
                     Show {ps}

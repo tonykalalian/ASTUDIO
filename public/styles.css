@@ -1,0 +1,19 @@
+body {
+  font-family: "Neutra Text", sans-serif;
+}
+.table-header {
+  background-color: #c0e3e5;
+  color: #322625;
+}
+
+.table-row-grey {
+  background-color: #ebebeb;
+}
+
+.table-row-grey td {
+  color: #322625;
+}
+
+.table-row td {
+  color: #322625;
+}

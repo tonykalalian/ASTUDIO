@@ -1,16 +1,29 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink,
+} from "react-router-dom";
 import { ProductProvider } from "./ProductContext";
 import { UserProvider } from "./UserContext";
 import UserTable from "./components/UserTable";
 import ProductTable from "./components/ProductTable";
+import "./App.css";
 
 function App() {
   return (
     <>
       <Router>
-        <Link to="/users">Users</Link>
-        <Link to="/products">Products</Link>
+        <nav>
+          <NavLink to="/users" activeClassName="active-link">
+            Users
+          </NavLink>
+          <span>/</span>
+          <NavLink to="/products" activeClassName="active-link">
+            Products
+          </NavLink>
+        </nav>
 
         <Routes>
           <Route
