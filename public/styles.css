@@ -1,5 +1,7 @@
 body {
   font-family: "Neutra Text", sans-serif;
+  padding: 0;
+  margin: 0;
 }
 .table-header {
   background-color: #c0e3e5;
@@ -37,4 +39,8 @@ nav span {
 .nav-active {
   background-color: #fdc936;
   color: #322625;
+}
+.content-container {
+  min-height: calc(100vh - 100px);
+  padding-bottom: 100px;
 }

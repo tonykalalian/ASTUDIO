@@ -1,30 +1,20 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  NavLink,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ProductProvider } from "./components/context/ProductContext";
 import { UserProvider } from "./components/context/UserContext";
 import UserTable from "./components/user/UserTable";
 import ProductTable from "./components/product/ProductTable";
+import Navbar from "./components/common/Navbar";
+import HomePage from "./pages/HomePage";
+import Footer from "./components/common/Footer"; // Import the Footer component
 
 function App() {
   return (
     <>
       <Router>
-        <nav>
-          <NavLink to="/users" className="active-link">
-            Users
-          </NavLink>
-          <span>/</span>
-          <NavLink to="/products" className="active-link">
-            Products
-          </NavLink>
-        </nav>
-
+        <Navbar />
         <Routes>
+          <Route path="/" element={<HomePage />} />
           <Route
             path="/users"
             element={
@@ -42,6 +32,7 @@ function App() {
             }
           />
         </Routes>
+        <Footer />
       </Router>
     </>
   );

@@ -47,7 +47,7 @@ const UserTable = () => {
       try {
         const response = await axios.get(
           "https://dummyjson.com/users/?limit=100"
-        );
+        ); // Update the limit as needed
         setUsers(response?.data?.users || []);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -60,7 +60,7 @@ const UserTable = () => {
   return (
     <>
       <h3>Users</h3>
-      <div className="container">
+      <div className="container content-container">
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
 
         <table

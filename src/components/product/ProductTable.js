@@ -69,7 +69,7 @@ const ProductTable = () => {
   return (
     <>
       <h3>Products</h3>
-      <div className="container">
+      <div className="container content-container">
         <div className="filter-options">
           <label>
             Category:
