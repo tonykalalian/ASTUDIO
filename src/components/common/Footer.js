@@ -40,7 +40,6 @@ const Footer = () => {
         <FooterLink href="/privacy">Privacy</FooterLink>
         <FooterLink href="/terms">Terms</FooterLink>
         <FooterLink href="/policy">Policy</FooterLink>
-        <FooterLink href="/contactus">Contact Us</FooterLink>
       </FooterLinks>
       <CopyrightText>
         &copy; {new Date().getFullYear()} All rights reserved.
