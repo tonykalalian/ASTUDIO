@@ -10,12 +10,13 @@ const Container = styled.div`
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  overflow-x: auto;
 `;
 
 const HeaderContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 20px;
 `;
 
@@ -23,21 +24,44 @@ const FilterOptions = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const SearchContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  margin-right: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 0;
+  }
+`;
+
+const CategoryLabel = styled.label`
+  font-size: 16px;
+  margin-right: 5px;
 `;
 
 const CategorySelect = styled.select`
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-left: 5px;
   font-size: 16px;
   margin-top: 0;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    width: auto;
+    margin-top: 10px;
+  }
 `;
 
 const CategoryOption = styled.option`
@@ -70,6 +94,37 @@ const Button = styled.button`
   margin: 5px;
   cursor: pointer;
   border-radius: 3px;
+`;
+
+const PageSizeSelect = styled.select`
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 0;
+
+  @media (max-width: 768px) {
+    width: auto;
+    margin-top: 10px;
+  }
+`;
+
+const PageSizeOption = styled.option`
+  font-size: 16px;
+`;
+
+const PageNumberInput = styled.input`
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 0;
+  width: 50px;
+
+  @media (max-width: 768px) {
+    width: auto;
+    margin-top: 10px;
+  }
 `;
 
 const ProductTable = () => {
@@ -129,6 +184,10 @@ const ProductTable = () => {
     }
   };
 
+  const handlePageSizeChange = (e) => {
+    setPageSize(Number(e.target.value));
+  };
+
   useEffect(() => {
     const apiUrl = "https://dummyjson.com/products?limit=100";
     axios
@@ -149,17 +208,16 @@ const ProductTable = () => {
         <FilterOptions>
           <SearchContainer>
             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-            <label>
-              Category:
-              <CategorySelect
-                value={categoryFilter}
-                onChange={handleCategoryFilterChange}
-              >
-                <CategoryOption value="ALL">ALL</CategoryOption>
-                <CategoryOption value="smartphones">Smartphones</CategoryOption>
-                <CategoryOption value="laptops">Laptops</CategoryOption>
-              </CategorySelect>
-            </label>
+            <CategoryLabel htmlFor="categoryFilter">Category:</CategoryLabel>
+            <CategorySelect
+              id="categoryFilter"
+              value={categoryFilter}
+              onChange={handleCategoryFilterChange}
+            >
+              <CategoryOption value="ALL">ALL</CategoryOption>
+              <CategoryOption value="smartphones">Smartphones</CategoryOption>
+              <CategoryOption value="laptops">Laptops</CategoryOption>
+            </CategorySelect>
           </SearchContainer>
         </FilterOptions>
       </HeaderContainer>
@@ -211,7 +269,7 @@ const ProductTable = () => {
         </span>
         <span>
           Go To Page:{" "}
-          <input
+          <PageNumberInput
             type="number"
             defaultValue={pageIndex + 1}
             min={1}
@@ -222,18 +280,13 @@ const ProductTable = () => {
           />
         </span>
         <span>
-          <select
-            value={pageSize}
-            onChange={(e) => {
-              setPageSize(Number(e.target.value));
-            }}
-          >
+          <PageSizeSelect value={pageSize} onChange={handlePageSizeChange}>
             {[5, 10, 20, 50].map((ps) => (
-              <option key={ps} value={ps}>
+              <PageSizeOption key={ps} value={ps}>
                 Show {ps}
-              </option>
+              </PageSizeOption>
             ))}
-          </select>
+          </PageSizeSelect>
         </span>
       </div>
     </Container>

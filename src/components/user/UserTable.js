@@ -10,6 +10,7 @@ const Container = styled.div`
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  overflow-x: auto;
 `;
 
 const Table = styled.table`
@@ -42,6 +43,25 @@ const Button = styled.button`
 
 const H1 = styled.h1`
   text-align: center;
+`;
+
+const PageNumberInput = styled.input`
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-right: 10px;
+  width: 60px;
+`;
+
+const PageSizeSelect = styled.select`
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 100px;
+`;
+
+const PageSizeOption = styled.option`
+  font-size: 16px;
 `;
 
 const UserTable = () => {
@@ -147,7 +167,7 @@ const UserTable = () => {
         </span>
         <span>
           Go To Page:{" "}
-          <input
+          <PageNumberInput
             type="number"
             defaultValue={pageIndex + 1}
             min={1}
@@ -158,18 +178,18 @@ const UserTable = () => {
           />
         </span>
         <span>
-          <select
+          <PageSizeSelect
             value={pageSize}
             onChange={(e) => {
               setPageSize(Number(e.target.value));
             }}
           >
             {[5, 10, 20, 50].map((ps) => (
-              <option key={ps} value={ps}>
+              <PageSizeOption key={ps} value={ps}>
                 Show {ps}
-              </option>
+              </PageSizeOption>
             ))}
-          </select>
+          </PageSizeSelect>
         </span>
       </div>
     </Container>

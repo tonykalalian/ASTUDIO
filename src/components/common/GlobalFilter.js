@@ -12,8 +12,8 @@ const SearchInput = styled.input`
   padding: 9.5px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-right: 5px;
   margin-left: 1px;
+  margin-right: 10px;
 `;
 
 const SearchLabel = styled.span`

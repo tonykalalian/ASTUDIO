@@ -6,7 +6,7 @@ import UserTable from "./components/user/UserTable";
 import ProductTable from "./components/product/ProductTable";
 import Navbar from "./components/common/Navbar";
 import HomePage from "./pages/HomePage";
-import Footer from "./components/common/Footer"; // Import the Footer component
+import Footer from "./components/common/Footer";
 
 function App() {
   return (
