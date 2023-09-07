@@ -1,19 +1,45 @@
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import styled from "styled-components";
+
+const FilterContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const SearchInput = styled.input`
+  flex: 1;
+  padding: 9.5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 5px;
+  margin-left: 1px;
+`;
+
+const SearchLabel = styled.span`
+  display: inline-flex;
+  align-items: center;
+  background-color: #f2f2f2;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+`;
+
 const GlobalFilter = ({ filter, setFilter }) => {
   return (
-    <div className="input-group">
-      <span className="input-group-text" id="basic-addon1">
+    <FilterContainer>
+      <SearchLabel>
         <SearchIcon style={{ fontSize: "small" }} />
         Search
-      </span>
-      <input
+      </SearchLabel>
+      <SearchInput
         type="text"
-        className="form-control"
         value={filter || ""}
         onChange={(e) => setFilter(e.target.value)}
+        placeholder="Search..."
       />
-    </div>
+    </FilterContainer>
   );
 };
 

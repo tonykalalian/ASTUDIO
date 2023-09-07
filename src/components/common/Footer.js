@@ -10,7 +10,7 @@ const FooterContainer = styled.footer`
 
 const CopyrightText = styled.p`
   font-size: 16px;
-  margin: 0;
+  margin-top: 10px;
 `;
 
 const NameText = styled.p`
@@ -19,10 +19,29 @@ const NameText = styled.p`
   color: #322625;
 `;
 
+const FooterLinks = styled.div`
+  margin-top: 10px;
+`;
+
+const FooterLink = styled.a`
+  font-size: 16px;
+  text-decoration: none;
+  color: #322625;
+
+  margin: 0 15px;
+`;
+
 const Footer = () => {
   return (
     <FooterContainer>
       <NameText>Tony Kalalian</NameText>
+      <FooterLinks>
+        <FooterLink href="/faq">FAQ</FooterLink>
+        <FooterLink href="/privacy">Privacy</FooterLink>
+        <FooterLink href="/terms">Terms</FooterLink>
+        <FooterLink href="/policy">Policy</FooterLink>
+        <FooterLink href="/contactus">Contact Us</FooterLink>
+      </FooterLinks>
       <CopyrightText>
         &copy; {new Date().getFullYear()} All rights reserved.
       </CopyrightText>

@@ -1,36 +1,45 @@
 import React from "react";
 import styled from "styled-components";
-
+import LuxBackground from ".././assets/background.jpg";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #f0f0f0;
-  color: #333;
+  background-image: url(${LuxBackground});
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  text-align: center;
 `;
 
 const Title = styled.h1`
-  font-size: 36px;
+  font-size: 48px;
   margin-bottom: 20px;
+  font-family: "Playfair Display", serif;
 `;
 
 const Description = styled.p`
-  font-size: 18px;
-  text-align: center;
-  max-width: 600px;
+  font-size: 24px;
+  max-width: 800px;
   margin-bottom: 40px;
+  font-family: "Neutra Text", sans-serif; 
 `;
 
 const Button = styled.button`
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  font-size: 18px;
+  background-color: #ffd700;
+  color: #333;
+  padding: 15px 30px;
+  font-size: 24px;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #f5c542;
+  }
 `;
 
 const HomePage = () => {
@@ -38,9 +47,9 @@ const HomePage = () => {
     <Container>
       <Title>Welcome to ASTUDIO</Title>
       <Description>
-        We are architects that leave the place better than we found it
+        Crafting Timeless Architecture for a Luxurious Lifestyle
       </Description>
-      <Button>Get Started</Button>
+      <Button>Explore Our Projects</Button>
     </Container>
   );
 };
