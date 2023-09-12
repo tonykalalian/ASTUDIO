@@ -42,7 +42,7 @@ const Logo = styled.div`
 
   a {
     text-decoration: none;
-    color: #f0c14b;
+    color: #ffd700;
     display: flex;
     align-items: center;
   }
@@ -81,7 +81,7 @@ const NavItem = styled.li`
 
   a {
     text-decoration: none;
-    color: #f0c14b;
+    color: #ffd700;
     font-weight: bold;
 
     &.active {
